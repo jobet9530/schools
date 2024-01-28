@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightning-design-system/2.11.8/styles/salesforce-lightning-design-system.min.css" integrity="sha512-Ll7ZVcZwH1j6ZAUmWe6kSiIUMgJiJGGAkGGWxxtVMuM4MHjDyBpxbPT9V/WI5K5Mi27bXhDafSJhluTYOnSPMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title></title>
+</head>
+  <body>
+    {% extends 'base.html' %}
+    {% load crispy_forms_tags %}
+    {% block main %}
+
+    <form method="post" action="/submit/data" hx-target="#dynamic-content" class="slds-form slds-form_stacked">
+        {% csrf_token %}
+        {{ form|crispy}}
+        
+        <label for="create-data" class="slds-form-element__label">Create Enrollment Data</label>
+        <input type="submit" value="School: " id="create-school-data" class="slds-button slds-button_brand">
+        <input type="submit" value="Grade: " id="create-grade-data" class="slds-button slds-button_brand">
+        <input type="submit" value="Grade Level: " id="create-grade-level-data" class="slds-button slds-button_brand">
+
+        <input type="datetime-local" value="Enrollment Date: " id="create-enrollment-date" class="slds-input"/>
+
+        <label for="enrollment-type" class="slds-form-element__label">Is this Student Graduate?</label>
+        <div class="slds-form-element__control">
+            <input type="radio" name="enrollment_type" value="Yes" id="yesGraduate" class="slds-radio"/>
+            <label for="yesGraduate" class="slds-radio__label">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">Yes</span>
+            </label>
+            <input type="radio" name="enrollment_type" value="No" id="noGraduate" class="slds-radio"/>
+            <label for="noGraduate" class="slds-radio__label">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">No</span>
+            </label>
+        </div>
+
+        <input type="datetime-local" value="Graduation Date: " id="create-graduation-date" class="slds-input"/>
+
+        <label for="active-type" class="slds-form-element__label">Is this Student Active?</label>
+        <div class="slds-form-element__control">
+            <input type="radio" name="active_type" value="Yes" id="yesActive" class="slds-radio"/>
+            <label for="yesActive" class="slds-radio__label">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">Yes</span>
+            </label>
+            <input type="radio" name="active_type" value="No" id="noActive" class="slds-radio"/>
+            <label for="noActive" class="slds-radio__label">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">No</span>
+            </label>
+        </div>
+
+        <button type="submit" class="slds-button slds-button_brand">Save</button>
+    </form>
+
+  </body>
+</html>
